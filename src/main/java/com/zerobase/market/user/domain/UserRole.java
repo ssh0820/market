@@ -1,4 +1,4 @@
-package com.zerobase.market.domain;
+package com.zerobase.market.user.domain;
 
 public enum UserRole {
     ADMIN, PUBLIC;

@@ -1,4 +1,4 @@
-package com.zerobase.market.config;
+package com.zerobase.market.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.zerobase.market"))
-                .paths(PathSelectors.ant("/user/**"))
+                .paths(PathSelectors.ant("/**"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(apiInfo());
     }

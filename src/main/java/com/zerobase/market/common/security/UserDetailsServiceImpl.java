@@ -1,4 +1,4 @@
-package com.zerobase.market.security;
+package com.zerobase.market.common.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;

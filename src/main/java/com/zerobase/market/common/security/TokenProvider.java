@@ -1,4 +1,4 @@
-package com.zerobase.market.security;
+package com.zerobase.market.common.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

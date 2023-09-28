@@ -1,6 +1,6 @@
-package com.zerobase.market.config;
+package com.zerobase.market.common.config;
 
-import com.zerobase.market.security.JwtAuthenticationFilter;
+import com.zerobase.market.common.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,5 @@
-package com.zerobase.market.security;
+package com.zerobase.market.common.security;
 
-import com.zerobase.market.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

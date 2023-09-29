@@ -1,10 +1,11 @@
-package com.zerobase.market.domain;
+package com.zerobase.market.product.domain;
 
+import com.zerobase.market.domain.Basket;
+import com.zerobase.market.domain.Category;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +39,11 @@ public class Product {
     @Comment("상태")
     private Status status;
 
-    @Embedded
-    private Date date;
+    @Comment("등록일")
+    private LocalDateTime registDate;
+
+    @Comment("수정일")
+    private LocalDateTime updateDate;
 
     @Comment("카테고리ID")
     @JoinColumn(name = "category_id")

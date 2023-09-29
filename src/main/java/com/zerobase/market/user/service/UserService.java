@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -35,8 +37,8 @@ public class UserService {
                     .gender(user.getGender())
                     .phoneNumber(user.getPhoneNumber())
                     .birthDate(user.getBirthDate())
-                    .registDate(user.getRegistDate())
-                    .updateDate(user.getUpdateDate())
+                    .registDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
         }
     }
@@ -61,7 +63,7 @@ public class UserService {
                 request.getEmail(),
                 request.getGender(),
                 request.getBirthDate(),
-                request.getUpdateDate()
+                LocalDateTime.now()
         );
 
         return UserDto.from(user);

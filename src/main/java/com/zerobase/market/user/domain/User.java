@@ -1,7 +1,7 @@
 package com.zerobase.market.user.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.zerobase.market.domain.Basket;
+import com.zerobase.market.basket.domain.Basket;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

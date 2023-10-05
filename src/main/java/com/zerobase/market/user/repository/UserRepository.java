@@ -10,9 +10,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // 해당 사용자 검색
     Optional<User> findByUsername(String username);
 
-    //사용자의 권한 검색
-    Optional<User> findAllByRoles(String username);
-
     // 사용자 유무 체크
     boolean existsByUsername(String username);
 

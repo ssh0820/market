@@ -15,7 +15,7 @@ public class UserRepositoryImpl implements UserCustomRepository{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public Optional<User> findAllByRoles(String username) {
+    public Optional<User> findAdminByRole(String username) {
         return jpaQueryFactory.select(user).from(user).stream().filter(user1 -> user.roles.equals("ADMIN")).findFirst();
     }
 

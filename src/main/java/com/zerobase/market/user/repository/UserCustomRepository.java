@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserCustomRepository {
-    Optional<User> findAllByRoles(String username);
+    Optional<User> findAdminByRole(String username);
 
 }

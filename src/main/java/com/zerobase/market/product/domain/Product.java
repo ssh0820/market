@@ -1,7 +1,7 @@
 package com.zerobase.market.product.domain;
 
-import com.zerobase.market.domain.Basket;
-import com.zerobase.market.domain.Category;
+import com.zerobase.market.basket.domain.Basket;
+import com.zerobase.market.category.domain.Category;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.CascadeType;

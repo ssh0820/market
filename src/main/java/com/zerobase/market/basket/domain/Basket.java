@@ -2,6 +2,11 @@ package com.zerobase.market.basket.domain;
 
 import com.zerobase.market.product.domain.Product;
 import com.zerobase.market.user.domain.User;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.CascadeType;
@@ -16,6 +21,10 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Basket {
 
     @Id

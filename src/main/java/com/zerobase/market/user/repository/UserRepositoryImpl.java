@@ -23,7 +23,7 @@ public class UserRepositoryImpl implements UserCustomRepository{
                 .select(user)
                 .from(user)
                 .stream()
-                .filter(user1 -> user.roles.equals("ADMIN"))
+                .filter(user1 -> user.userRole.equals("ADMIN"))
                 .findAny();
     }
 }

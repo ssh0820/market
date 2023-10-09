@@ -1,6 +1,7 @@
 package com.zerobase.market.user.dto;
 
 import com.zerobase.market.user.domain.Gender;
+import com.zerobase.market.user.domain.UserRole;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class UserRequest {
     private String phoneNumber;
     private String email;
     private Gender gender;
+    private UserRole userRole;
     private LocalDate birthDate;
     private LocalDateTime updateDate;
 }

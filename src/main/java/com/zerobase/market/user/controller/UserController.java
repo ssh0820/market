@@ -32,7 +32,7 @@ public class UserController {
     @PostMapping("/signin")
     public ResponseEntity<?> signin(@RequestBody Auth.SignIn request) {
         UserDto userDto = userService.userCheck(request);
-        return ResponseEntity.ok(tokenProvider.generateToken(userDto.getUsername(), userDto.getRoles()));
+        return ResponseEntity.ok(tokenProvider.generateToken(userDto.getUsername(), userDto.getUserRole()));
     }
 
     @PostMapping("/{username}")

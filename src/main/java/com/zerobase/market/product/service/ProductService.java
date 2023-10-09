@@ -1,8 +1,11 @@
 package com.zerobase.market.product.service;
 
+import com.zerobase.market.product.domain.Product;
 import com.zerobase.market.product.repository.ProductRepository;
 import com.zerobase.market.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,5 +16,4 @@ public class ProductService {
 
     private final UserRepository userRepository;
 
-    //boolean authCheck = userRepository.findAllByRoles(user.getUsername()).stream().anyMatch(user1 -> user1.equals("ADMIN"));
 }

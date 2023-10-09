@@ -2,6 +2,11 @@ package com.zerobase.market.product.domain;
 
 import com.zerobase.market.basket.domain.Basket;
 import com.zerobase.market.category.domain.Category;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.CascadeType;
@@ -19,6 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
 
     @Id
@@ -31,7 +40,7 @@ public class Product {
     private String name;
 
     @Comment("가격")
-    private Long price;
+    private double price;
 
     @Comment("재고")
     private Long stock;

@@ -28,5 +28,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .roles(user.getUserRole().name())
                 .build();
         }
-    }
 }

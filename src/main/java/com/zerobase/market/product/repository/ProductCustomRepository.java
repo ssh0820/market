@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface ProductCustomRepository {
 
-    public Product regisProduct(Product product);
+    public Product registProduct(Product product);
 
     public List<Product> searchProduct(Pageable pageable);
 
     public Optional<Product> findById(Long id);
 
-    public Product updateProduct(Product productDto);
+    public Product updateProduct(Product product);
 
     public Long deleteProduct(Long id);
 

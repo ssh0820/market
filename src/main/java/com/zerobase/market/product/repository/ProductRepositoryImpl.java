@@ -24,7 +24,7 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
     }
 
     @Override
-    public Product regisProduct(Product product) {
+    public Product registProduct(Product product) {
         em.persist(product);
         return product;
     }
@@ -43,8 +43,8 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
     }
 
     @Override
-    public Product updateProduct(Product productDto) {
-        return em.merge(productDto);
+    public Product updateProduct(Product product) {
+        return em.merge(product);
     }
 
     @Override

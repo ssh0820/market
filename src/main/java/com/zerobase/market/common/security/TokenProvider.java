@@ -1,5 +1,6 @@
 package com.zerobase.market.common.security;
 
+import com.zerobase.market.user.domain.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -25,17 +26,10 @@ public class TokenProvider {
     @Value("{spring.jwt.secret}")
     private String secretKey;
 
-    /**
-     * 토큰 생성(발급)
-     * @param username
-     * @param roles
-     * @return
-     */
-    public String generateToken(String username, List<String> roles) {
+    public String generateToken(String username, UserRole userRole) {
 
         // 다음 정보들을 포함한 claims 생성
         //      - username
-        //      - roles
         //      - 생성 시간
         //      - 만료 시간
         //      - signature

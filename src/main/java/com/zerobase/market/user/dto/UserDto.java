@@ -2,6 +2,7 @@ package com.zerobase.market.user.dto;
 
 import com.zerobase.market.user.domain.Gender;
 import com.zerobase.market.user.domain.User;
+import com.zerobase.market.user.domain.UserRole;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,7 +19,7 @@ public class UserDto {
     private String phoneNumber;
     private String email;
     private Gender gender;
-    private List<String> roles;
+    private UserRole userRole;
     private LocalDate birthDate;
     private LocalDateTime registDate;
     private LocalDateTime updateDate;
@@ -30,7 +31,7 @@ public class UserDto {
                 .phoneNumber(user.getPhoneNumber())
                 .email(user.getEmail())
                 .gender(user.getGender())
-                .roles(user.getRoles())
+                .userRole(user.getUserRole())
                 .birthDate(user.getBirthDate())
                 .registDate(user.getRegistDate())
                 .updateDate(user.getUpdateDate())

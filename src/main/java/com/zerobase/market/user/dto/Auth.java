@@ -1,6 +1,7 @@
 package com.zerobase.market.user.dto;
 
 import com.zerobase.market.user.domain.Gender;
+import com.zerobase.market.user.domain.UserRole;
 import lombok.Builder;
 import lombok.Data;
 
@@ -27,6 +28,6 @@ public class Auth {
         private LocalDate birthDate;
         private LocalDateTime registDate;
         private LocalDateTime updateDate;
-        private List<String> roles;
+        private UserRole userRole;
     }
 }

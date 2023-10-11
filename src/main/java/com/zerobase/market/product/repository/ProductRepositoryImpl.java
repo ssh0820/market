@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.zerobase.market.product.domain.QProduct.product;
 
@@ -25,13 +24,13 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
     }
 
     @Override
-    public Product save(Product product) {
+    public Product regisProduct(Product product) {
         em.persist(product);
         return product;
     }
 
     @Override
-    public List<Product> findAll(Pageable pageable) {
+    public List<Product> searchProduct(Pageable pageable) {
         return queryFactory.selectFrom(product).fetch();
     }
 
@@ -44,12 +43,12 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
     }
 
     @Override
-    public Product update(Product productDto) {
+    public Product updateProduct(Product productDto) {
         return em.merge(productDto);
     }
 
     @Override
-    public Long deleteById(Long id) {
+    public Long deleteProduct(Long id) {
         return queryFactory.delete(product)
                 .where(product.id.eq(id)).execute();
     }

@@ -8,14 +8,14 @@ import java.util.Optional;
 
 public interface ProductCustomRepository {
 
-    public Product save(Product product);
+    public Product regisProduct(Product product);
 
-    public List<Product> findAll(Pageable pageable);
+    public List<Product> searchProduct(Pageable pageable);
 
     public Optional<Product> findById(Long id);
 
-    public Product update(Product productDto);
+    public Product updateProduct(Product productDto);
 
-    public Long deleteById(Long id);
+    public Long deleteProduct(Long id);
 
 }

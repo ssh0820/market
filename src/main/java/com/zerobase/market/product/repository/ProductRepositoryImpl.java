@@ -33,14 +33,6 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
     }
 
     @Override
-    public Optional<Product> findById(Long id) {
-         Product findProduct = queryFactory.selectFrom(product)
-                .where(product.id.eq(id))
-                .fetchOne();
-        return Optional.ofNullable(findProduct);
-    }
-
-    @Override
     public Product updateProduct(Product product) {
         return em.merge(product);
     }

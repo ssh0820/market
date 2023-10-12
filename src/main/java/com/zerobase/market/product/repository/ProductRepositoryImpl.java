@@ -2,7 +2,6 @@ package com.zerobase.market.product.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.zerobase.market.product.domain.Product;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
@@ -11,7 +10,6 @@ import java.util.Optional;
 
 import static com.zerobase.market.product.domain.QProduct.product;
 
-@RequiredArgsConstructor
 public class ProductRepositoryImpl implements ProductCustomRepository {
 
     private final JPAQueryFactory queryFactory;

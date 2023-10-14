@@ -43,9 +43,7 @@ public class CategoryService {
 
     public CategoryDto updateCategory(Long categoryId, CategoryRequest categoryRequest) {
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryException());
-
-        category.updateCategory(categoryRequest.getName(), LocalDateTime.now());
-
+        category.updateCategory(categoryRequest);
         return CategoryDto.from(category);
     }
 

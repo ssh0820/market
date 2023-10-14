@@ -1,6 +1,7 @@
 package com.zerobase.market.user.domain;
 
 import com.zerobase.market.basket.domain.Basket;
+import com.zerobase.market.product.domain.Product;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -66,6 +67,9 @@ public class User{
 
     @OneToMany(mappedBy = "user")
     private List<Basket> basketList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Product> productList = new ArrayList<>();
 
     public void updateUser(String username, String phoneNumber, String email, Gender gender, LocalDate birthDate, LocalDateTime updateDate){
         this.username = username;

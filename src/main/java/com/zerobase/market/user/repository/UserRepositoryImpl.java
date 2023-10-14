@@ -2,6 +2,8 @@ package com.zerobase.market.user.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.zerobase.market.user.domain.User;
+import com.zerobase.market.user.domain.UserRole;
+
 import javax.persistence.EntityManager;
 import java.util.Optional;
 
@@ -20,12 +22,22 @@ public class UserRepositoryImpl implements UserCustomRepository{
     }
 
     @Override
-    public Optional<User> findAdminByRole(String username) {
-        return queryFactory
+    public Boolean findAdminByRole(Long userId) {
+
+        boolean authCheck = false;
+
+        Optional<User> findUser = queryFactory
                 .select(user)
                 .from(user)
-                .stream()
-                .filter(user1 -> user.userRole.equals("ADMIN"))
-                .findAny();
+                .where(
+                        user.id.eq(userId),
+                        user.userRole.eq(UserRole.ADMIN)
+                ).stream().findAny();
+
+        if(!findUser.isEmpty()){
+            authCheck = true;
+        }
+
+        return authCheck;
     }
 }

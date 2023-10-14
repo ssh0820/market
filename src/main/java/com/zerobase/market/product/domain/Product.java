@@ -2,6 +2,8 @@ package com.zerobase.market.product.domain;
 
 import com.zerobase.market.basket.domain.Basket;
 import com.zerobase.market.category.domain.Category;
+import com.zerobase.market.product.dto.ProductRequest;
+import com.zerobase.market.user.domain.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,12 +56,25 @@ public class Product {
     @Comment("수정일")
     private LocalDateTime updateDate;
 
+    @OneToMany(mappedBy = "product")
+    private List<Basket> basketList = new ArrayList<>();
+
     @Comment("카테고리ID")
     @JoinColumn(name = "category_id")
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Category category;
 
-    @OneToMany(mappedBy = "product")
-    private List<Basket> basketList = new ArrayList<>();
+    @Comment("상품등록자ID")
+    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private User user;
+
+    public void updateProduct(ProductRequest productRequest){
+        this.name = productRequest.getName();
+        this.price = productRequest.getPrice();
+        this.stock = productRequest.getStock();
+        this.status = productRequest.getStatus();
+        this.updateDate = LocalDateTime.now();
+    }
 
 }

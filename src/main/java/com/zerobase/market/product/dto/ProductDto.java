@@ -28,6 +28,8 @@ public class ProductDto {
 
     private Long categoryId;
 
+    private Long userId;
+
     public static ProductDto from(Product product){
         return ProductDto.builder()
                 .id(product.getId())
@@ -38,6 +40,7 @@ public class ProductDto {
                 .registDate(product.getRegistDate())
                 .updateDate(product.getUpdateDate())
                 .categoryId(product.getCategory().getId())
+                .userId(product.getUser().getId())
                 .build();
     }
 

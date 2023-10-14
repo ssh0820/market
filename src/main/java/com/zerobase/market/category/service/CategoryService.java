@@ -36,21 +36,28 @@ public class CategoryService {
         }
     }
 
-    public CategoryDto updateCategory(String name, CategoryRequest categoryRequest) {
-        Category category = categoryRepository.findByName(name).orElseThrow(() -> new CategoryException());
-
-        category.updateCategory(categoryRequest.getName(), LocalDateTime.now());
-
+    public CategoryDto viewCategory(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryException());
         return CategoryDto.from(category);
     }
 
-    public int deleteCategory(String name) {
-        boolean categoryCheck = categoryRepository.existsByName(name);
+    public CategoryDto updateCategory(Long categoryId, CategoryRequest categoryRequest) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryException());
+        category.updateCategory(categoryRequest);
+        return CategoryDto.from(category);
+    }
+
+    public int deleteCategory(Long categoryId) {
+        boolean categoryCheck = categoryRepository.existsById(categoryId);
 
         if(categoryCheck){
             throw new CategoryException();
         }else{
-            return categoryRepository.deleteByName(name);
+            categoryRepository.deleteById(categoryId);
         }
+
+        return 0;
     }
+
+
 }

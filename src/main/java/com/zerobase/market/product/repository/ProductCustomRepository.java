@@ -12,8 +12,6 @@ public interface ProductCustomRepository {
 
     public List<Product> searchProduct(Pageable pageable);
 
-    public Optional<Product> findById(Long id);
-
     public Product updateProduct(Product product);
 
     public Long deleteProduct(Long id);

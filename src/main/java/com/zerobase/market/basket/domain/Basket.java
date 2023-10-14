@@ -42,7 +42,7 @@ public class Basket {
     @Comment("수정일")
     private LocalDateTime updateDate;
 
-    @Comment("사용자ID")
+    @Comment("장바구니 사용자ID")
     @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;

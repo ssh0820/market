@@ -1,12 +1,12 @@
 package com.zerobase.market.category.domain;
 
+import com.zerobase.market.category.dto.CategoryRequest;
 import com.zerobase.market.product.domain.Product;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.Column;
@@ -45,10 +45,9 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Product> productList = new ArrayList<>();
 
-    @Builder
-    public void updateCategory(String name, LocalDateTime updateDate){
-        this.name = name;
-        this.updateDate = updateDate;
+    public void updateCategory(CategoryRequest categoryRequest){
+        this.name = categoryRequest.getName();
+        this.updateDate = LocalDateTime.now();
     }
 
 }

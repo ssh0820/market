@@ -5,7 +5,10 @@ import com.zerobase.market.category.exception.CategoryException;
 import com.zerobase.market.category.repository.CategoryRepository;
 import com.zerobase.market.product.domain.Product;
 import com.zerobase.market.product.dto.ProductDto;
+import com.zerobase.market.product.dto.ProductRequest;
+import com.zerobase.market.product.exception.ProductException;
 import com.zerobase.market.product.repository.ProductRepository;
+import com.zerobase.market.user.exception.AuthException;
 import com.zerobase.market.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,24 +25,45 @@ public class ProductService {
 
     private final CategoryRepository categoryRepository;
 
-    public ProductDto save(Long categoryId , ProductDto productDto){
+    public ProductDto registProduct(ProductDto productDto) {
 
-        final Category category = categoryRepository.findById(categoryId)
+        Category category = categoryRepository.findById(productDto.getCategoryId())
                 .orElseThrow(() -> new CategoryException());
 
-        Product product = Product.builder()
-                 .name(productDto.getName())
-                 .price(productDto.getPrice())
-                 .stock(productDto.getStock())
-                 .status(productDto.getStatus())
-                 .category(category)
-                 .registDate(LocalDateTime.now())
-                 .updateDate(LocalDateTime.now())
-                .build();
+        Boolean authCheck = userRepository.findAdminByRole(productDto.getUserId());
 
-        productRepository.save(product);
+        if (authCheck){
+            Product product = productRepository.save(
+                    Product.builder()
+                            .name(productDto.getName())
+                            .price(productDto.getPrice())
+                            .stock(productDto.getStock())
+                            .status(productDto.getStatus())
+                            .category(category)
+                            .registDate(LocalDateTime.now())
+                            .updateDate(LocalDateTime.now())
+                            .build()
+            );
 
-        return productDto;
+            return ProductDto.from(product);
+        }else{
+            throw new AuthException();
+        }
     }
 
+    public ProductDto viewProduct(Long productId) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ProductException());
+        return ProductDto.from(product);
+    }
+
+    public ProductDto updateProduct(Long productId, ProductRequest productRequest){
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ProductException());
+        product.updateProduct(productRequest);
+        return ProductDto.from(product);
+    }
+
+    public Long deleteProduct(Long productId){
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ProductException());
+        return productRepository.deleteProduct(product.getId());
+    }
 }

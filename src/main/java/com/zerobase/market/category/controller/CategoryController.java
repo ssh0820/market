@@ -30,14 +30,19 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.registCategory(categoryDto));
     }
 
-    @PostMapping("/{name}")
-    public ResponseEntity<?> updateCategory(@PathVariable String name, CategoryRequest categoryRequest){
-        return ResponseEntity.ok(categoryService.updateCategory(name, categoryRequest));
+    @GetMapping("/{categoryId}")
+    public ResponseEntity<?> viewCategory(@PathVariable Long categoryId){
+        return ResponseEntity.ok(categoryService.viewCategory(categoryId));
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<?> deleteCategory(@PathVariable String name){
-        return ResponseEntity.ok(categoryService.deleteCategory(name));
+    @PostMapping("/{categoryId}")
+    public ResponseEntity<?> updateCategory(@PathVariable Long categoryId, CategoryRequest categoryRequest){
+        return ResponseEntity.ok(categoryService.updateCategory(categoryId, categoryRequest));
+    }
+
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long categoryId){
+        return ResponseEntity.ok(categoryService.deleteCategory(categoryId));
     }
 
 }

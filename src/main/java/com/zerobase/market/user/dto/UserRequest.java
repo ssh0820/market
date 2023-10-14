@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
 public class UserRequest {
     private String password;
     private String phoneNumber;

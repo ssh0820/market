@@ -2,6 +2,7 @@ package com.zerobase.market.product.controller;
 
 import com.zerobase.market.product.dto.ProductDto;
 import com.zerobase.market.product.dto.ProductRequest;
+import com.zerobase.market.product.dto.ProductSearch;
 import com.zerobase.market.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +22,8 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/")
-    public ResponseEntity<?> productList(Pageable pageable, ProductRequest productRequest){
-        return ResponseEntity.ok(productService.productList(pageable, productRequest));
+    public ResponseEntity<?> productList(Pageable pageable, ProductSearch productSearch){
+        return ResponseEntity.ok(productService.productList(pageable, productSearch));
     }
 
     @GetMapping("/{productId}")

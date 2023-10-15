@@ -2,6 +2,7 @@ package com.zerobase.market.basket.controller;
 
 import com.zerobase.market.basket.dto.BasketDto;
 import com.zerobase.market.basket.dto.BasketRequest;
+import com.zerobase.market.basket.dto.BasketSearch;
 import com.zerobase.market.basket.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +20,8 @@ public class BasketController {
     private final BasketService basketService;
 
     @GetMapping("/")
-    public ResponseEntity<?> basketList(Pageable pageable, BasketRequest basketRequest){
-        return ResponseEntity.ok(basketService.basketList(pageable, basketRequest));
+    public ResponseEntity<?> basketList(Pageable pageable, BasketSearch basketSearch){
+        return ResponseEntity.ok(basketService.basketList(pageable, basketSearch));
     }
 
     @GetMapping("/{basketId}")

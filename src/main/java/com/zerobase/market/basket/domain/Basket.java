@@ -1,5 +1,6 @@
 package com.zerobase.market.basket.domain;
 
+import com.zerobase.market.basket.dto.BasketRequest;
 import com.zerobase.market.product.domain.Product;
 import com.zerobase.market.user.domain.User;
 import lombok.AccessLevel;
@@ -51,4 +52,9 @@ public class Basket {
     @JoinColumn(name = "product_id")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Product product;
+
+    public void updatebasket(BasketRequest basketRequest){
+        quantity = basketRequest.getQuantity();
+        updateDate = LocalDateTime.now();
+    }
 }

@@ -3,14 +3,15 @@ package com.zerobase.market.category.service;
 import com.zerobase.market.category.domain.Category;
 import com.zerobase.market.category.dto.CategoryDto;
 import com.zerobase.market.category.dto.CategoryRequest;
+import com.zerobase.market.category.dto.CategorySearch;
 import com.zerobase.market.category.exception.CategoryException;
 import com.zerobase.market.category.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +19,8 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public Page<Category> categoryList(final Pageable pageable){
-        return categoryRepository.findAll(pageable);
+    public List<Category> categoryList(Pageable pageable, CategorySearch categorySearch){
+        return categoryRepository.searchCategory(pageable, categorySearch);
     }
 
     public CategoryDto registCategory(CategoryDto categoryDto) {

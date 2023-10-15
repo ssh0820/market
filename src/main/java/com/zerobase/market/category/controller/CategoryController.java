@@ -2,6 +2,7 @@ package com.zerobase.market.category.controller;
 
 import com.zerobase.market.category.dto.CategoryDto;
 import com.zerobase.market.category.dto.CategoryRequest;
+import com.zerobase.market.category.dto.CategorySearch;
 import com.zerobase.market.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +22,8 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping("/list")
-    public ResponseEntity<?> categoryList(final Pageable pageable){
-        return ResponseEntity.ok(categoryService.categoryList(pageable));
+    public ResponseEntity<?> categoryList(final Pageable pageable, CategorySearch categorySearch){
+        return ResponseEntity.ok(categoryService.categoryList(pageable, categorySearch));
     }
 
     @PostMapping("/")

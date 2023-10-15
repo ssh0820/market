@@ -47,16 +47,9 @@ public class CategoryService {
         return CategoryDto.from(category);
     }
 
-    public int deleteCategory(Long categoryId) {
-        boolean categoryCheck = categoryRepository.existsById(categoryId);
-
-        if(categoryCheck){
-            throw new CategoryException();
-        }else{
-            categoryRepository.deleteById(categoryId);
-        }
-
-        return 0;
+    public Long deleteCategory(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryException());
+        return categoryRepository.deleteCategory(category.getId());
     }
 
 

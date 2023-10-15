@@ -4,6 +4,7 @@ import com.zerobase.market.category.domain.Category;
 import com.zerobase.market.category.exception.CategoryException;
 import com.zerobase.market.category.repository.CategoryRepository;
 import com.zerobase.market.product.domain.Product;
+import com.zerobase.market.product.domain.Status;
 import com.zerobase.market.product.dto.ProductDto;
 import com.zerobase.market.product.dto.ProductRequest;
 import com.zerobase.market.product.dto.ProductSearch;
@@ -41,7 +42,7 @@ public class ProductService {
                             .name(productDto.getName())
                             .price(productDto.getPrice())
                             .stock(productDto.getStock())
-                            .status(productDto.getStatus())
+                            .status(Status.AVAILABLE)
                             .category(category)
                             .registDate(LocalDateTime.now())
                             .updateDate(LocalDateTime.now())
@@ -65,6 +66,9 @@ public class ProductService {
 
     public ProductDto updateProduct(Long productId, ProductRequest productRequest){
         Product product = productRepository.findById(productId).orElseThrow(() -> new ProductException());
+        if(productRequest.getStock() == 0){
+            productRequest.setStatus(Status.UNAVAILABLE);
+        }
         product.updateProduct(productRequest);
         return ProductDto.from(productRepository.updateProduct(product));
     }

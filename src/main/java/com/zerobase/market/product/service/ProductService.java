@@ -11,9 +11,11 @@ import com.zerobase.market.product.repository.ProductRepository;
 import com.zerobase.market.user.exception.AuthException;
 import com.zerobase.market.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -51,6 +53,10 @@ public class ProductService {
         }
     }
 
+    public List<Product> productList(Pageable pageable, ProductRequest productRequest){
+        return productRepository.searchProduct(pageable, productRequest);
+    }
+
     public ProductDto viewProduct(Long productId) {
         Product product = productRepository.findById(productId).orElseThrow(() -> new ProductException());
         return ProductDto.from(product);
@@ -59,7 +65,7 @@ public class ProductService {
     public ProductDto updateProduct(Long productId, ProductRequest productRequest){
         Product product = productRepository.findById(productId).orElseThrow(() -> new ProductException());
         product.updateProduct(productRequest);
-        return ProductDto.from(product);
+        return ProductDto.from(productRepository.updateProduct(product));
     }
 
     public Long deleteProduct(Long productId){

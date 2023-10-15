@@ -2,11 +2,11 @@ package com.zerobase.market.product.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.zerobase.market.product.domain.Product;
+import com.zerobase.market.product.dto.ProductRequest;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.Optional;
 
 import static com.zerobase.market.product.domain.QProduct.product;
 
@@ -28,7 +28,7 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
     }
 
     @Override
-    public List<Product> searchProduct(Pageable pageable) {
+    public List<Product> searchProduct(Pageable pageable, ProductRequest productRequest) {
         return queryFactory.selectFrom(product).fetch();
     }
 
@@ -38,8 +38,8 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
     }
 
     @Override
-    public Long deleteProduct(Long id) {
+    public Long deleteProduct(Long productId) {
         return queryFactory.delete(product)
-                .where(product.id.eq(id)).execute();
+                .where(product.id.eq(productId)).execute();
     }
 }

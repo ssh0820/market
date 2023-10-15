@@ -6,6 +6,7 @@ import com.zerobase.market.category.repository.CategoryRepository;
 import com.zerobase.market.product.domain.Product;
 import com.zerobase.market.product.dto.ProductDto;
 import com.zerobase.market.product.dto.ProductRequest;
+import com.zerobase.market.product.dto.ProductSearch;
 import com.zerobase.market.product.exception.ProductException;
 import com.zerobase.market.product.repository.ProductRepository;
 import com.zerobase.market.user.exception.AuthException;
@@ -53,8 +54,8 @@ public class ProductService {
         }
     }
 
-    public List<Product> productList(Pageable pageable, ProductRequest productRequest){
-        return productRepository.searchProduct(pageable, productRequest);
+    public List<Product> productList(Pageable pageable, ProductSearch productSearch){
+        return productRepository.searchProduct(pageable, productSearch);
     }
 
     public ProductDto viewProduct(Long productId) {

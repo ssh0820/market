@@ -3,6 +3,7 @@ package com.zerobase.market.basket.service;
 import com.zerobase.market.basket.domain.Basket;
 import com.zerobase.market.basket.dto.BasketDto;
 import com.zerobase.market.basket.dto.BasketRequest;
+import com.zerobase.market.basket.dto.BasketSearch;
 import com.zerobase.market.basket.exception.BasketException;
 import com.zerobase.market.basket.repository.BasketRepository;
 import com.zerobase.market.product.domain.Product;
@@ -28,8 +29,8 @@ public class BasketService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
-    public List<Basket> basketList(Pageable pageable, BasketRequest basketRequest){
-        return basketRepository.searchBasket(pageable, basketRequest);
+    public List<Basket> basketList(Pageable pageable, BasketSearch basketSearch){
+        return basketRepository.searchBasket(pageable, basketSearch);
     }
 
     public BasketDto viewBasket(Long basketId){

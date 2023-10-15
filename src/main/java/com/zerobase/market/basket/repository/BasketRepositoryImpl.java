@@ -1,8 +1,9 @@
 package com.zerobase.market.basket.repository;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.zerobase.market.basket.domain.Basket;
-import com.zerobase.market.basket.dto.BasketRequest;
+import com.zerobase.market.basket.dto.BasketSearch;
 import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
@@ -28,9 +29,22 @@ public class BasketRepositoryImpl implements BasketCustomRepository {
     }
 
     @Override
-    public List<Basket> searchBasket(Pageable pageable, BasketRequest basketRequest){
-        return queryFactory.selectFrom(basket).fetch();
+    public List<Basket> searchBasket(Pageable pageable, BasketSearch basketSearch){
+
+        BooleanBuilder builder = new BooleanBuilder();
+
+        if(basketSearch.getProductNm() != null){
+            builder.and(basket.product.name.like(basketSearch.getProductNm()));
+        }
+
+        return queryFactory.selectFrom(basket)
+                .where(builder)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(basket.product.name.desc())
+                .fetch();
     }
+
 
     @Override
     public Basket updateBasket(Basket basket){

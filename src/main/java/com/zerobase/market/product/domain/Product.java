@@ -77,4 +77,7 @@ public class Product {
         this.updateDate = LocalDateTime.now();
     }
 
+    public void updateStock(long stock) {
+        this.stock = stock;
+    }
 }

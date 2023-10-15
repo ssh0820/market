@@ -5,10 +5,13 @@ import com.zerobase.market.basket.dto.BasketDto;
 import com.zerobase.market.basket.dto.BasketRequest;
 import com.zerobase.market.basket.dto.BasketSearch;
 import com.zerobase.market.basket.exception.BasketException;
+import com.zerobase.market.basket.exception.QuantityExceoption;
 import com.zerobase.market.basket.repository.BasketRepository;
 import com.zerobase.market.product.domain.Product;
+import com.zerobase.market.product.domain.Status;
 import com.zerobase.market.product.dto.ProductDto;
 import com.zerobase.market.product.exception.ProductException;
+import com.zerobase.market.product.exception.StatusExceoption;
 import com.zerobase.market.product.repository.ProductRepository;
 import com.zerobase.market.user.domain.User;
 import com.zerobase.market.user.exception.UserException;
@@ -46,6 +49,14 @@ public class BasketService {
 
         boolean findBasket = basketRepository.existsById(basketDto.getId());
 
+        if(product.getStatus().equals(Status.UNAVAILABLE)){
+            throw new StatusExceoption();
+        }
+
+        if(product.getStock() < basketDto.getQuantity()){
+            throw new QuantityExceoption();
+        }
+
         if(!findBasket){
             Basket basket = Basket.builder()
                     .quantity(basketDto.getQuantity())
@@ -63,11 +74,20 @@ public class BasketService {
 
     public BasketDto updateBasket(Long basketId, BasketRequest basketRequest){
         Basket basket = basketRepository.findById(basketId).orElseThrow(() -> new BasketException());
+
+        Product product = productRepository.findById(basketRequest.getProductId()).orElseThrow(()-> new ProductException());
+
+        if(product.getStock() < basketRequest.getQuantity()){
+            throw new QuantityExceoption();
+        }
         basket.updatebasket(basketRequest);
+        //재고 - 수량 조회
+        product.updateStock(product.getStock()-basketRequest.getQuantity());
         return BasketDto.from(basketRepository.updateBasket(basket));
     }
 
     public Long deleteBasket(Long baskeetId) {
-        return basketRepository.deleteBasket(baskeetId);
+        Basket basket = basketRepository.findById(baskeetId).orElseThrow(() -> new BasketException());
+        return basketRepository.deleteBasket(basket.getId());
     }
 }

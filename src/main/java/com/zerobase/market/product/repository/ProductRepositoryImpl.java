@@ -31,7 +31,6 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
 
     @Override
     public List<Product> searchProduct(Pageable pageable, ProductSearch productSearch) {
-
         BooleanBuilder builder = new BooleanBuilder();
 
         if(productSearch.getName() != null){
@@ -39,6 +38,9 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
         }
         if(productSearch.getStatus() != null){
             builder.and(product.status.eq(productSearch.getStatus()));
+        }
+        if(productSearch.getUserId() != null){
+            builder.and(product.user.id.eq(productSearch.getUserId()));
         }
 
         return queryFactory.selectFrom(product)

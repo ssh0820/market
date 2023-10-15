@@ -9,4 +9,5 @@ import java.time.LocalDateTime;
 public class ProductSearch {
     private String name;
     private Status status;
+    private Long userId;
 }

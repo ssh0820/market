@@ -1,8 +1,15 @@
 package com.zerobase.market.basket.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.zerobase.market.basket.domain.Basket;
+import com.zerobase.market.basket.dto.BasketRequest;
+import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityManager;
+
+import java.util.List;
+
+import static com.zerobase.market.basket.domain.QBasket.basket;
 
 public class BasketRepositoryImpl implements BasketCustomRepository {
     private final JPAQueryFactory queryFactory;
@@ -13,4 +20,27 @@ public class BasketRepositoryImpl implements BasketCustomRepository {
         this.em = em;
         this.queryFactory = new JPAQueryFactory(em);
     }
+
+    @Override
+    public Basket registBasket(Basket basket){
+        em.persist(basket);
+        return basket;
+    }
+
+    @Override
+    public List<Basket> searchBasket(Pageable pageable, BasketRequest basketRequest){
+        return queryFactory.selectFrom(basket).fetch();
+    }
+
+    @Override
+    public Basket updateBasket(Basket basket){
+        return em.merge(basket);
+    }
+
+    @Override
+    public Long deleteBasket(Long basketId){
+        return queryFactory.delete(basket)
+                .where(basket.id.eq(basketId)).execute();
+    }
+
 }

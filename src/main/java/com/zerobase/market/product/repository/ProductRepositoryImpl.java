@@ -3,7 +3,6 @@ package com.zerobase.market.product.repository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.zerobase.market.product.domain.Product;
-import com.zerobase.market.product.dto.ProductRequest;
 import com.zerobase.market.product.dto.ProductSearch;
 import org.springframework.data.domain.Pageable;
 
